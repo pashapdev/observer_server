@@ -12,9 +12,8 @@ import (
 )
 
 type App struct {
-	handler http.Handler
-	conf    *config.Config
-	server  *http.Server
+	conf   *config.Config
+	server *http.Server
 }
 
 type AppOption func(*App)
@@ -22,7 +21,6 @@ type AppOption func(*App)
 func New(conf *config.Config, opts ...AppOption) *App {
 	app := new(App)
 	app.conf = conf
-	app.handler = router.New()
 	app.server = &http.Server{
 		Addr:        conf.Address,
 		Handler:     router.New(),
@@ -61,7 +59,7 @@ func (a *App) GracefulStop(serverCtx context.Context, sig <-chan os.Signal, serv
 	go func() {
 		<-shutdownCtx.Done()
 		if shutdownCtx.Err() == context.DeadlineExceeded {
-			log.Fatal("graceful shutdown timed out.. forcing exit.")
+			log.Fatal("graceful shutdown timed out... forcing exit.")
 		}
 	}()
 
