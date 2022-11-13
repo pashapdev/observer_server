@@ -23,7 +23,7 @@ linters-settings:
   gocyclo:
     min-complexity: 15
   goimports:
-    local-prefixes: github.com/pashapdev/extended_pgx_batch
+    local-prefixes: github.com/pashapdev/observer_server
   gomnd:
     # don't include the "operation" and "assign"
     checks:
